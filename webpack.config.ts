@@ -1,4 +1,4 @@
-import  webpack, { Stats } from 'webpack';
+import  webpack from 'webpack';
 import {buildWebpack} from "./config/build/buildWebpack";
 import {BuildMode, BuildPaths, BuildPlatform} from "./config/build/types/types";
 import path from "path";

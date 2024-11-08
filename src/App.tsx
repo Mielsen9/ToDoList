@@ -4,12 +4,12 @@ import About from "@/components/pages/about/About";
 import avatarPng from "@/asset/ss.png";
 import avatarJpg from "@/asset/tobi.jpg";
 
-function TODO() {
-    TODO2()
-}
-function TODO2() {
-    throw new Error();
-}
+// function TODO() {
+//     TODO2()
+// }
+// function TODO2() {
+//     throw new Error();
+// }
 
 export const App = () => {
     const [count, setCount] = useState<number>(0);
