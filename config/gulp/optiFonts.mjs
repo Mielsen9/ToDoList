@@ -1,14 +1,16 @@
+import gulp from 'gulp';
 
-const plumber = require('gulp-plumber');
-const notify = require('gulp-notify');
+import plumber from 'gulp-plumber';
+import notify from 'gulp-notify';
 
-const fs = require('fs');
-const gulp = require('gulp');
-const fonter = require('gulp-fonter-fix')
+import fonter from 'gulp-fonter-fix';
+import fs from 'fs';
+
+import ttf2woff2 from 'gulp-ttf2woff2';
 
 
-const srcFolder = "./src";
-const destFolder = './public';
+const srcFolder = "./src/asset/gulp";
+const destFolder = './src/asset';
 
 gulp.task('otfToTtf', () => {
     // Ищем файлы шрифтів .otf
@@ -36,7 +38,6 @@ gulp.task('otfToTtf', () => {
 });
 
 gulp.task('ttfToWoff', async () => {
-    const { default: ttf2woff2 } = await import('gulp-ttf2woff2');
     // Ищем файлы шрифтів .ttf
     return (
         gulp
@@ -68,7 +69,7 @@ gulp.task('ttfToWoff', async () => {
 
 gulp.task('fontsStyle', () => {
     // Файл стилей підключення шрифтів
-    let fontsFile = `${srcFolder}/scss/base/_fontsAutoGen.scss`;
+    let fontsFile = `./src/scss/base/_fontsAutoGen.scss`;
     // Проверяем существуют ли файлы шрифтів
     fs.readdir(`${destFolder}/fonts/`, function (err, fontsFiles) {
         if (fontsFiles) {
@@ -111,7 +112,7 @@ gulp.task('fontsStyle', () => {
                     }
                     fs.appendFile(
                         fontsFile,
-                        `@font-face {\n\tfont-family: ${fontName};\n\tfont-display: swap;\n\tsrc: url("../fonts/${fontFileName}.woff2") format("woff2"), url("../fonts/${fontFileName}.woff") format("woff");\n\tfont-weight: ${fontWeight};\n\tfont-style: normal;\n}\r\n`,
+                        `@font-face {\n\tfont-family: ${fontName};\n\tfont-display: swap;\n\tsrc: url("~@/asset/fonts/${fontFileName}.woff2") format("woff2"), url("~@/asset/fonts/${fontFileName}.woff") format("woff");\n\tfont-weight: ${fontWeight};\n\tfont-style: normal;\n}\r\n`,
                         cb
                     );
                     newFileOnly = fontFileName;
@@ -125,4 +126,4 @@ gulp.task('fontsStyle', () => {
     function cb() {}
 });
 
-gulp.task('default', gulp.series('otfToTtf', 'ttfToWoff', 'fontsStyle'));
+gulp.task('optiFonts', gulp.series('otfToTtf', 'ttfToWoff', 'fontsStyle'));

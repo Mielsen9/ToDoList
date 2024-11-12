@@ -41,6 +41,7 @@
     "cssnano": "^7.0.6",
     "fork-ts-checker-webpack-plugin": "^9.0.2",
     "gulp": "4.0.2",
+    "gulp-changed": "^5.0.2",
     "gulp-fonter-fix": "^0.0.1",
     "gulp-notify": "^5.0.0",
     "gulp-plumber": "^1.2.1",
@@ -66,7 +67,12 @@
     "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
+    "-": "^0.0.1",
+    "D": "^1.0.0",
+    "gulp-ext-replace": "^0.3.0",
     "gulp-fonter-unx": "^0.3.0",
+    "gulp-imagemin": "^9.1.0",
+    "imagemin-webp": "^8.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0"

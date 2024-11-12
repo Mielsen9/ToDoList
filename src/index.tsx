@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client';
 import  "./scss/style.scss";
 import {App} from "./App";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {LazyAbout} from "@/components/pages/about/About.lazy";
-import {LazyShop} from "@/components/pages/shop/Shop.lazy";
+import {LazyAbout} from "@/pages/about/About.lazy";
+import {LazyShop} from "@/pages/shop/Shop.lazy";
 
 
 const root = document.getElementById('root');

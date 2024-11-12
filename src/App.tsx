@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import * as s from "./App.module.scss";
-import About from "@/components/pages/about/About";
-import avatarPng from "@/asset/ss.png";
-import avatarJpg from "@/asset/tobi.jpg";
-import Telegram from "@/asset/telegram.svg";
+import About from "@/pages/about/About";
+import avatarPng from "@/asset/images/ss.webp";
+import avatarJpg from "@/asset/images/tobi.jpg";
+import Telegram from "@/asset/images/svgicons/telegram.svg";
 
 // function TODO() {
 //     TODO2()
@@ -24,14 +24,12 @@ export const App = () => {
                 <img src={avatarPng} alt=""/>
                 <img src={avatarJpg} alt=""/>
             </div>
-
             <div>
                 <Telegram/>
             </div>
 
             <h1 className={s.h1}>{count}</h1>
-            <button className={"red"} onClick={increment}>inc</button>
-            {/* Змінено на styles */}
+            <button className={"red"} onClick={increment}>inc</button> {/* Змінено на styles */}
             <About/>
 
         </div>
