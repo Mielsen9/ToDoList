@@ -1,4 +1,5 @@
 @use "@/scss/utils/function" as *;
+@use "@/scss/utils/mixins" as *;
 @use "@/scss/utils/utils";
 .button {
  background-color: red;
@@ -10,4 +11,5 @@
 }
 .flex-b {
  display: flex;
+
 }
