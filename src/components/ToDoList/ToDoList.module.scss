@@ -1,0 +1,8 @@
+@use "@/scss/utils/error" as *;
+.activeFilter {
+  background-color: #788d64;
+}
+
+.isDone {
+  opacity: 0.5;
+}

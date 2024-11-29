@@ -1,15 +1,18 @@
 @use "@/scss/utils/function" as *;
 @use "@/scss/utils/mixins" as *;
 @use "@/scss/utils/utils";
+
 .button {
  background-color: red;
 }
+
 .h1 {
  color: white;
  padding-top: rem(54);
  background-color: #788d64;
 }
-.flex-b {
+
+.flex {
  display: flex;
 
 }
