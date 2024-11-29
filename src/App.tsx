@@ -29,7 +29,7 @@ export const App = () => {
         {id: toDoListsID1, title: "What to doc", filter: "all"},
         {id: toDoListsID2, title: "What to buy", filter: "all"}
     ]);
-    const [tasksObj, setTasksObj] = useState({
+    const [tasksObj, setTasksObj] = useState<tasksObjStateType>({
         [toDoListsID1]: [
             {id: v1(), title: "CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
