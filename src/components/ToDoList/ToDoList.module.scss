@@ -1,8 +1,30 @@
 @use "@/scss/utils/error" as *;
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.inputForm {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 .activeFilter {
   background-color: #788d64;
 }
-
 .isDone {
   opacity: 0.5;
+}
+.tasksConteiner {
+  display: flex;
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+}
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

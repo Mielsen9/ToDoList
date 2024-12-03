@@ -1,8 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import * as s from "@/components/ToDoList/ToDoList.module.scss";
+import * as s from "@/components/InputForm/InputForm.module.scss";
+import {Button, TextField} from "@mui/material";
 
 type InputFormPropsType = {
 	addItem: (title: string) => void,
+	style?: string,
 }
 export const InputForm = (props: InputFormPropsType) => {
 	const [taskTitle, setTaskTitle] = useState("");
@@ -32,14 +34,19 @@ export const InputForm = (props: InputFormPropsType) => {
 
 	};
 	return (
-		<div>
-			<input value={taskTitle}
-				   onChange={inputChangeHandler}
-				   onKeyUp={taskTitleHandler}
-				   className={error ? s.error : ""}
-			/>
-			<button onClick={addTask}>+</button>
-			{error && <div className={s['error-massage']}>{error}</div>}
+		<div className={`${s.inputConteiner} ${props.style}`}>
+			<TextField id="outlined-basic"
+					   label="Add Task"
+					   variant="outlined"
+					   size="small"
+					   error={!!error}
+					   fullWidth
+					   value={taskTitle}
+					   onChange={inputChangeHandler}
+					   onKeyUp={taskTitleHandler}
+					   helperText={error}/>
+			<Button onClick={addTask}
+					variant="contained">+</Button>
 		</div>
 	)
 }

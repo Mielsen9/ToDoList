@@ -3,6 +3,9 @@ import * as s from "./App.module.scss";
 import {ToDoList} from "@/components/ToDoList/ToDoList";
 import {v1} from "uuid";
 import {InputForm} from "@/components/InputForm/InputForm";
+import Grid from '@mui/material/Grid2';
+import Paper from '@mui/material/Paper';
+import ButtonAppBar from "@/components/Nav/Nav";
 
 //type
 export type FilterValueType = 'all' | 'completed' | 'active';
@@ -102,35 +105,45 @@ export const App = () => {
     }
 
     return (
-        <div className={s.flex}>
-            <InputForm  addItem={addToDoList}/>
-            {
-                toDoLists.map((td) => {
-                    let tasksForToDoList = tasksObj[td.id];
-                    if(td.filter === 'completed') {
-                        tasksForToDoList = tasksForToDoList.filter(i => i.isDone)
-                    }
-                    if(td.filter === 'active') {
-                        tasksForToDoList = tasksForToDoList.filter(i => !i.isDone)
-                    }
-                    return(
-                        <ToDoList
-                            key={ td.id }
-                            id={ td.id }
-                            title = { td.title }
-                            tasks = { tasksForToDoList }
-                            deleteTasks = { deleteTasks }
-                            changeFilter = { changeFilter }
-                            addTasks = { addTasks }
-                            changeStatus = { changeStatus }
-                            filter={ td.filter }
-                            removeToDoList={removeToDoList}
-                            changeTaskTitle={changeTaskTitle}
-                            changeToDoListTitle={changeToDoListTitle}
-                        />
-                    )
-                })
+        <div className={s.conteiner}>
+            <ButtonAppBar />
+            <InputForm style={s.inputForm} addItem={addToDoList}/>
+            <Grid container spacing={4}>
+
+                {
+                    toDoLists.map((td) => {
+                        let tasksForToDoList = tasksObj[td.id];
+                        if(td.filter === 'completed') {
+                            tasksForToDoList = tasksForToDoList.filter(i => i.isDone)
+                        }
+                        if(td.filter === 'active') {
+                            tasksForToDoList = tasksForToDoList.filter(i => !i.isDone)
+                        }
+                        return(<Grid size={6}>
+                            <Paper elevation={10}
+                                   style={{
+                                       padding: "10px",
+                            }}
+                            >
+                            <ToDoList
+                                key={ td.id }
+                                id={ td.id }
+                                title = { td.title }
+                                tasks = { tasksForToDoList }
+                                deleteTasks = { deleteTasks }
+                                changeFilter = { changeFilter }
+                                addTasks = { addTasks }
+                                changeStatus = { changeStatus }
+                                filter={ td.filter }
+                                removeToDoList={removeToDoList}
+                                changeTaskTitle={changeTaskTitle}
+                                changeToDoListTitle={changeToDoListTitle}
+                            />
+                            </Paper>
+                    </Grid>)
+                    })
             }
+            </Grid>
         </div>
     );
 };
