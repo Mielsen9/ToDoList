@@ -9,18 +9,18 @@ import ButtonAppBar from "@/components/Nav/Nav";
 
 //type
 export type FilterValueType = 'all' | 'completed' | 'active';
-export type TasksType = {
-    id: string,
-    title: string,
-    isDone: boolean,
+export type TasksStateType = {
+    [id: string]: Array<TasksType>
 }
 export type ToDoListType = {
     id: string,
     title: string,
     filter: FilterValueType,
 }
-export type tasksObjStateType = {
-    [id: string]: Array<TasksType>
+export type TasksType = {
+    id: string,
+    title: string,
+    isDone: boolean,
 }
 // App
 export const App = () => {
@@ -32,7 +32,7 @@ export const App = () => {
         {id: toDoListsID1, title: "What to doc", filter: "all"},
         {id: toDoListsID2, title: "What to buy", filter: "all"}
     ]);
-    const [tasksObj, setTasksObj] = useState<tasksObjStateType>({
+    const [tasksObj, setTasksObj] = useState<TasksStateType>({
         [toDoListsID1]: [
             {id: v1(), title: "CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},

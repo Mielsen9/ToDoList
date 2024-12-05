@@ -1,12 +1,5 @@
-type StateType = {
-	age: number,
-	childrenCount: number,
-	name: string
-}
-type ActionType = {
-	type: string,
-	[key: string]: any
-}
+import {ActionType, StateType} from "@/state/reducer/user-reducer/user-reducer-type";
+
 export const userReducer = (state: StateType, action: ActionType) => {
 	switch (action.type) {
 		case 'INCREMENT-AGE':

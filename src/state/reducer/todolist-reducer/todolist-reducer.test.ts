@@ -1,8 +1,12 @@
-import {toDoListReducer} from "@/state/todolist-reducer";
+import {
+	changeTodolistFilterAC,
+	changeTodolistTitleAC,
+	toDoListReducer
+} from "@/state/reducer/todolist-reducer/todolist-reducer";
 import {v1} from "uuid";
 import {ToDoListType} from "@/App";
 
-test("correct toDoList mast be removed", () => {
+test("toDoList mast be removed", () => {
 	let toDoListsID1 = v1();
 	let toDoListsID2 = v1();
 
@@ -30,10 +34,9 @@ test("toDoList mast be added", () => {
 	expect(endState[2].title).toBe(newTitle);
 	expect(endState[2].filter).toBe("all");
 });
-test("correct toDoList title mast change ", () => {
+test("toDoList title mast change ", () => {
 	let toDoListsID1 = v1();
 	let toDoListsID2 = v1();
-
 	let newTitle = "New Title";
 
 	const startState: Array<ToDoListType> = [
@@ -41,18 +44,14 @@ test("correct toDoList title mast change ", () => {
 		{id: toDoListsID2, title: "What to buy", filter: "all"}
 	];
 
-	const action = {
-		type: 'CHANGE-TODOLIST-TITLE',
-		id: toDoListsID1,
-		title: newTitle,
-	}
+	const action = changeTodolistTitleAC(toDoListsID1, newTitle)
 
 	const endState = toDoListReducer(startState, action)
 
 	expect(endState[0].title).toBe(newTitle);
 	expect(endState[0].filter).toBe("all");
 });
-test("correct toDoList filter mast change ", () => {
+test("toDoList filter mast change ", () => {
 	let toDoListsID1 = v1();
 	let toDoListsID2 = v1();
 
@@ -63,11 +62,7 @@ test("correct toDoList filter mast change ", () => {
 		{id: toDoListsID2, title: "What to buy", filter: "all"}
 	];
 
-	const action = {
-		type: 'CHANGE-TODOLIST-FILTER',
-		id: toDoListsID1,
-		filter: newFilter,
-	}
+	const action = changeTodolistFilterAC(toDoListsID1, newFilter)
 
 	const endState = toDoListReducer(startState, action)
 
