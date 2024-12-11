@@ -1,3 +1,5 @@
+import {FilterValueType} from "@/App";
+
 export type ActionType =
 	| AddedTodolistType
 	| RemoveTodolistType
@@ -22,5 +24,5 @@ export type ChangeTodolistTitleType = {
 export type ChangeTodolistFilterType = {
 	type: 'CHANGE-TODOLIST-FILTER',
 	id: string,
-	filter: string,
+	filter: FilterValueType,
 }

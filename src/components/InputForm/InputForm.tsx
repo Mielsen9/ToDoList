@@ -1,20 +1,25 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
 import * as s from "@/components/InputForm/InputForm.module.scss";
 import {Button, TextField} from "@mui/material";
-
+// Type
 type InputFormPropsType = {
-	addItem: (title: string) => void,
 	style?: string,
+	addItem: (title: string) => void,
 }
-export const InputForm = (props: InputFormPropsType) => {
+// InputForm
+export const InputForm = React.memo((props: InputFormPropsType) => {
+	// UseState
+	console.log('InputForm is called')
 	const [taskTitle, setTaskTitle] = useState("");
 	const [error, setError] = useState("")
-
-	const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+	// Logic
+	const inputChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		setTaskTitle(e.currentTarget.value) // take value at e
-	};
-	const taskTitleHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-		setError("")
+	}, []);
+	const taskTitleHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+		if(error !== "") {
+			setError("")
+		}
 		if (e.key === 'Enter') {
 			if (taskTitle.trim() !== "") {
 				props.addItem(taskTitle)
@@ -23,8 +28,8 @@ export const InputForm = (props: InputFormPropsType) => {
 				setError("Title is required")
 			}
 		}
-	};
-	const addTask = () => {
+	},[error, taskTitle, props.addItem]);
+	const addTask =useCallback(() => {
 		if (taskTitle.trim() !== "") {
 			props.addItem(taskTitle)
 			setTaskTitle('')
@@ -32,7 +37,8 @@ export const InputForm = (props: InputFormPropsType) => {
 			setError("Title is required")
 		}
 
-	};
+	},[taskTitle, props.addItem]);
+	// Return
 	return (
 		<div className={`${s.inputConteiner} ${props.style}`}>
 			<TextField id="outlined-basic"
@@ -49,4 +55,4 @@ export const InputForm = (props: InputFormPropsType) => {
 					variant="contained">+</Button>
 		</div>
 	)
-}
+});

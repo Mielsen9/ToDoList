@@ -1,8 +1,21 @@
 import {TasksStateType} from "@/App";
 import {ActionType, AddedTaskType, ChangeTaskStatusType, ChangeTaskTitleType, RemoveTaskType} from "./task-reducer-type"
 import {v1} from "uuid";
+import {toDoListsID1, toDoListsID2} from "@/state/reducer/todolist-reducer/todolist-reducer";
 
-export const taskReducer = (state: TasksStateType, action: ActionType): TasksStateType => {
+const initialState: TasksStateType = {
+	[toDoListsID1]: [
+		{id: v1(), title: "CSS", isDone: true},
+		{id: v1(), title: "JS", isDone: true},
+		{id: v1(), title: "React", isDone: false},
+	],
+	[toDoListsID2]: [
+		{id: v1(), title: "Bread", isDone: true},
+		{id: v1(), title: "Milk", isDone: true},
+	],
+};
+
+export const taskReducer = (state: TasksStateType = initialState, action: ActionType): TasksStateType => {
 	switch (action.type) {
 		case 'ADDED-TASK': {
 			const newTask = {
@@ -13,7 +26,7 @@ export const taskReducer = (state: TasksStateType, action: ActionType): TasksSta
 			// Додаємо нове завдання до потрібного списку
 			return {
 				...state,
-				[action.id]: [newTask, ...state[action.id]],
+				[action.id]: state[action.id] ? [newTask, ...state[action.id]] : [newTask],
 			};
 		}
 		case 'REMOVE-TASK':
@@ -23,8 +36,8 @@ export const taskReducer = (state: TasksStateType, action: ActionType): TasksSta
 			};
 		case 'CHANGE-TASK-TITLE': {
 			return {
-				...state,
-				[action.id]: state[action.id].map(t =>
+					...state,
+					[action.id]: state[action.id].map(t =>
 					t.id === action.taskId
 						? { ...t, title: action.title } // Створюємо копію об'єкта із новим title
 						: t // Інші елементи залишаються без змін
@@ -42,11 +55,10 @@ export const taskReducer = (state: TasksStateType, action: ActionType): TasksSta
 			};
 		}
 		case 'ADDED-TODOLIST': {
-
 			return {
 				...state,
 				[action.id]: [] // Додаємо новий ключ зі значенням порожнього масиву
-			};
+			}
 		}
 		case 'REMOVE-TODOLIST': {
 			const newState = { ...state }; // Створюємо копію стану
@@ -54,9 +66,10 @@ export const taskReducer = (state: TasksStateType, action: ActionType): TasksSta
 			return newState; // Повертаємо новий стан
 		}
 		default:
-			throw new Error("I have problem!!!")
+			return state;
 	}
 }
+
 export const addedTaskAC = (toDoListsID: string, title: string): AddedTaskType => {
 	return {
 		type: 'ADDED-TASK' as const,

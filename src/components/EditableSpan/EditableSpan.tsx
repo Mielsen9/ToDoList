@@ -1,27 +1,29 @@
 import React, {useState} from "react";
-
+// Type
 type EditableSpanPropsType = {
 	title: string
 	onchangeInput: (title: string) => void,
 };
-export const EditableSpan = (props: EditableSpanPropsType) => {
+// EditableSpan
+export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
+	// State
+	console.log('EditableSpan is called')
 	const [editMode, setEditMode] = useState(true);
 	const [inputTitle, setInputTitle] = useState("")
-// show input
+	// Logic
 	const changeEditMode = () => {
 		setEditMode(false);
 		setInputTitle(props.title)
 	};
-// View input
 	const changeViewMode = () => {
 		setEditMode(true)
 		props.onchangeInput(inputTitle)
 	};
-// Change input
 	const changeInput = (e:any) => {
 		let inputTitleValue = e.currentTarget.value;
 		setInputTitle(inputTitleValue)
 	};
+	// Return
 	return (
 		<div>{
 			editMode
@@ -33,4 +35,4 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
 				/>
 		}</div>
 	)
-};
+});
