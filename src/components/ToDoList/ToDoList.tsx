@@ -1,23 +1,18 @@
-import React, {ChangeEvent, useCallback} from "react";
+import React, {useCallback} from "react";
 import {FilterValueType, TasksType} from "@/App";
 import * as s from "./ToDoList.module.scss";
 import {InputForm} from "@/components/InputForm/InputForm";
 import {EditableSpan} from "@/components/EditableSpan/EditableSpan";
-import {Button, IconButton} from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
+import {Button} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "@/state/store";
-import {
-	addedTaskAC,
-	changeTaskStatusAC,
-	changeTaskTitleAC,
-	removeTaskAC
-} from "@/state/reducer/task-reducer/task-reducer";
+import {addedTaskAC} from "@/state/reducer/task-reducer/task-reducer";
 import {
 	changeTodolistFilterAC,
 	changeTodolistTitleAC,
 	removeTodolistAC
 } from "@/state/reducer/todolist-reducer/todolist-reducer";
+import {Task} from "@/components/Task/Task";
 //Type
 type PropsType = {
 	toDoListId: string,
@@ -71,35 +66,13 @@ export const ToDoList = React.memo((props:PropsType) => {
 						   addItem={addTasks}/>
 				<ul>
 					{tasksForToDoList && tasksForToDoList.length > 0 ? (
-						tasksForToDoList.map((t) => {
-							const deleteTask = () => {
-								dispatch(removeTaskAC(props.toDoListId, t.id));
-							};
-							const changeCheckBox = (e: ChangeEvent<HTMLInputElement>) => {
-								dispatch(changeTaskStatusAC(props.toDoListId, t.id, e.currentTarget.checked)); // take true or false at checkbox
-							};
-							const changeTaskTitle = (title: string) => {
-								dispatch(changeTaskTitleAC(props.toDoListId, t.id, title));
-							};
-							return (
-								<li className={`${t.isDone ? s.isDone : ""} ${s.listItem}`}
-									key={t.id}>
-									<div className={s.flex}>
-										<input type="checkbox"
-											   style={{ margin: "10px" }}
-											   onChange={changeCheckBox}
-											   checked={t.isDone}/>
-										<EditableSpan title={t.title}
-													  onchangeInput={changeTaskTitle} />
-									</div>
-									<IconButton aria-label="delete"
-												size="small"
-												onClick={deleteTask}>
-										<DeleteIcon fontSize="inherit" />
-									</IconButton>
-								</li>
-							);
-						})
+						tasksForToDoList.map((task) =>
+							<Task key={task.id}
+								  toDoListId={props.toDoListId}
+								  taskId={task.id}
+								  isDone={task.isDone}
+								  taskTitle={task.title} />
+						)
 					) : (
 						<li>No tasks available</li> // If no tasks available, show this message
 					)}
