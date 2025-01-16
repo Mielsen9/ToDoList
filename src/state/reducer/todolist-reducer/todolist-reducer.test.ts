@@ -28,7 +28,7 @@ test("toDoList mast be added", () => {
 		{id: toDoListsID1, title: "What to doc", filter: "all"},
 		{id: toDoListsID2, title: "What to buy", filter: "all"}
 	]
-	const endState = toDoListReducer(startState, { type: 'ADDED-TODOLIST', title: newTitle})
+	const endState = toDoListReducer(startState, { type: 'ADDED-TODOLIST', id: toDoListsID1, title: newTitle})
 
 	expect(endState.length).toBe(3);
 	expect(endState[2].title).toBe(newTitle);
